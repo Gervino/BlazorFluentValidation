@@ -1,0 +1,43 @@
+﻿@page "/"
+@using BlazorFluentValidation.Data
+
+<h1>Blazored FluentValidation Demo!</h1>
+<hr/>
+<EditForm Model="@Employee" OnValidSubmit="@SubmitValidForm">
+    <FluentValidationValidator />
+    <ValidationSummary />
+    <div class="form-group">
+        <label class="col-form-label">Name:</label>
+        <div class="col-md-6">
+            <InputText @bind-Value="@Employee.Name"></InputText>
+            <ValidationMessage For="@(()=> Employee.Name)" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-form-label">Age:</label>
+        <div class="col-md-6">
+            <InputNumber @bind-Value="@Employee.Age"></InputNumber>
+            <ValidationMessage For="@(()=> Employee.Age)" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-form-label">Email:</label>
+        <div class="col-md-6">
+            <InputText @bind-Value="@Employee.Email"></InputText>
+            <ValidationMessage For="@(()=> Employee.Email)" />
+        </div>
+    </div>
+
+    <button class="btn btn-success" type="submit">Save</button>
+    <label>@message</label>
+</EditForm>
+
+@code{
+    Employee Employee = new Employee();
+    string message;
+
+    void SubmitValidForm()
+    {
+        message = "Submitted Successful !";
+    }
+}
